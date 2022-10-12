@@ -10,7 +10,10 @@ on:
         description: 'The release channel to update to, either latest or recommended'
         required: false
         default: 'latest'
-        type: string
+        type: choice
+        options:
+          - latest
+          - recommended
 
 jobs:
   update-versions:
