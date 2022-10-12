@@ -1,0 +1,59 @@
+{
+  "schemaVersion": 1,
+  "id": "balmtemplate",
+  "version": "${version}",
+
+  "name": "Balm Template Mod",
+  "description": "",
+  "authors": [
+    "BlayTheNinth"
+  ],
+  "contact": {
+    "homepage": "https://blay09.net/mods/balm",
+    "sources": "https://github.com/ModdingForBlockheads/balm-mod",
+    "issues": "https://github.com/ModdingForBlockheads/balm-mod/issues"
+  },
+
+  "license": "All Rights Reserved",
+  "icon": "balmtemplate-icon.png",
+
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "net.blay09.mods.balmtemplate.FabricBalmTemplate"
+    ],
+    "client": [
+      "net.blay09.mods.balmtemplate.client.FabricBalmTemplateClient"
+    ],
+    "modmenu": [
+      "net.blay09.mods.balmtemplate.compat.ModMenuIntegration"
+    ],
+    "jade": [
+      "net.blay09.mods.balmtemplate.compat.FabricJadeBalmTemplatePlugin"
+    ]
+  },
+  "mixins": [
+  ],
+  "depends": {
+    "cloth-config2": ">=5.0.34",
+    "balm-fabric": ">=4.3.0",
+    "fabricloader": ">=0.14.7",
+    "fabric": "*",
+    "minecraft": "1.19.x",
+    "java": ">=17"
+  },
+  "suggests": {
+    "modmenu": "*"
+  },
+  "custom": {
+    "modmenu": {
+      "links": {
+        "modmenu.discord": "https://discord.gg/scGAfXC"
+      }
+    },
+    "waila:plugins": {
+      "id": "balmtemplate:wthit",
+      "initializer": "net.blay09.mods.balmtemplate.compat.WTHITBalmTemplatePlugin"
+    }
+  }
+}
