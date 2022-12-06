@@ -7,6 +7,4 @@ on:
 jobs:
   build:
     uses: ModdingForBlockheads/Workflows/.github/workflows/build.yml@main
-    # or for cases where we want a Maven artifact on every push:
-    # uses: ModdingForBlockheads/Workflows/.github/workflows/publish-snapshot.yml@main
     secrets: inherit
