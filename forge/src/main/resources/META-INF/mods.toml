@@ -1,7 +1,7 @@
 modLoader="javafml"
 loaderVersion="[41,)"
 license="All rights reserved"
-issueTrackerURL="https://github.com/ModdingForBlockheads/balm-mod/issues"
+issueTrackerURL="https://github.com/TwelveIterationMods/balm-mod/issues"
 
 [[mods]]
 modId="balmtemplate"
