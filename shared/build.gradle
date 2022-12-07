@@ -9,10 +9,6 @@ minecraft {
     version(minecraft_version)
 }
 
-repositories {
-    maven { url "https://maven.bai.lol" }
-}
-
 dependencies {
     compileOnly group: 'org.spongepowered', name: 'mixin', version: '0.8.4'
     compileOnly "mcp.mobius.waila:wthit-api:mojmap-5.5.1"
