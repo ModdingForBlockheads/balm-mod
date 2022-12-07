@@ -21,3 +21,7 @@ dependencies {
         exclude(group: "net.fabricmc.fabric-api")
     }
 }
+
+configurations {
+    testImplementation.extendsFrom compileOnly
+}
