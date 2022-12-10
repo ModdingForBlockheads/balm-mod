@@ -1,5 +1,5 @@
 modLoader="javafml"
-loaderVersion="[41,)"
+loaderVersion="[44,)"
 license="All rights reserved"
 issueTrackerURL="https://github.com/TwelveIterationMods/balm-mod/issues"
 
@@ -17,18 +17,18 @@ description='''
 [[dependencies.balmtemplate]]
     modId="forge"
     mandatory=true
-    versionRange="[41,)"
+    versionRange="[44,)"
     ordering="NONE"
     side="BOTH"
 [[dependencies.balmtemplate]]
     modId="minecraft"
     mandatory=true
-    versionRange="[1.19,1.20)"
+    versionRange="[1.19.3,1.20)"
     ordering="NONE"
     side="BOTH"
 [[dependencies.balmtemplate]]
     modId="balm"
     mandatory=true
-    versionRange="[4.3.0,)"
+    versionRange="[4.5.3,)"
     ordering="NONE"
     side="BOTH"
