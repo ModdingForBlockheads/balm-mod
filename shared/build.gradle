@@ -20,7 +20,7 @@ dependencies {
     mappings loom.officialMojangMappings()
     compileOnly 'org.spongepowered:mixin:0.8.4'
 
-    compileOnly("net.blay09.mods:balm-fabric:${balm_version}") {
+    modCompileOnly("net.blay09.mods:balm-fabric:${balm_version}") {
         transitive = false
         changing = balm_version.endsWith("SNAPSHOT")
     }
