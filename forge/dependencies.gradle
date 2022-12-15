@@ -1,20 +1,5 @@
 repositories {
-    // For JEI
-    maven { url "https://dvs1.progwml6.com/files/maven/" }
-
-    // For WTHIT
-    maven { url "https://maven.bai.lol" }
 }
 
 dependencies {
-    compileOnly fg.deobf("mezz.jei:jei-$jei_minecraft_version-forge-api:$jei_version")
-    if (jei_version == minecraft_version) {
-        runtimeOnly fg.deobf("mezz.jei:jei-$jei_minecraft_version-forge:$jei_version")
-    }
-
-    compileOnly fg.deobf("me.shedaniel.cloth:cloth-config-forge:$cloth_config_version")
-
-    compileOnly fg.deobf("curse.maven:jade-324717:$jade_forge_version")
-    compileOnly fg.deobf("mcp.mobius.waila:wthit-api:forge-$wthit_version")
-    compileOnly fg.deobf("curse.maven:the-one-probe-245211:$theoneprobe_version")
 }

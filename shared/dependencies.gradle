@@ -1,23 +1,5 @@
 repositories {
-    // For JEI
-    maven { url "https://dvs1.progwml6.com/files/maven/" }
-
-    // For WTHIT
-    maven { url "https://maven.bai.lol" }
-
-    // For REI and Cloth Config
-    maven { url "https://maven.shedaniel.me/" }
 }
 
 dependencies {
-    compileOnly("me.shedaniel.cloth:cloth-config-fabric:$cloth_config_version") {
-        transitive = false
-    }
-
-    compileOnly "mezz.jei:jei-$jei_minecraft_version-common-api:$jei_version"
-    compileOnly("me.shedaniel:RoughlyEnoughItems-api:$rei_version") {
-        transitive = false
-    }
-
-    compileOnly "mcp.mobius.waila:wthit-api:mojmap-$wthit_version"
 }
