@@ -25,6 +25,9 @@
     "client": [
       "net.blay09.mods.balmtemplate.client.FabricBalmTemplateClient"
     ],
+    "fabric-datagen": [
+      "net.blay09.mods.balmtemplate.datagen.BalmTemplateDataGenerator"
+    ],
     "modmenu": [
       "net.blay09.mods.balmtemplate.compat.ModMenuIntegration"
     ],

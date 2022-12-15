@@ -1,10 +1,18 @@
-dependencies {
-    compileOnly fg.deobf("mezz.jei:jei-1.19.2-common-api:11.4.0.288")
-    compileOnly fg.deobf("mezz.jei:jei-1.19.2-forge-api:11.4.0.288")
-    //runtimeOnly fg.deobf("mezz.jei:jei-1.19.2-forge:11.4.0.288")
+repositories {
+    // For JEI
+    maven { url "https://dvs1.progwml6.com/files/maven/" }
 
-    compileOnly fg.deobf("curse.maven:badpackets-615134:3773642")
-    compileOnly fg.deobf("curse.maven:wthit-455982:3856256")
-    compileOnly fg.deobf("curse.maven:jade-324717:4010505")
-    compileOnly fg.deobf("curse.maven:the-one-probe-245211:3430022")
+    // For WTHIT
+    maven { url "https://maven.bai.lol" }
+}
+
+dependencies {
+    compileOnly fg.deobf("mezz.jei:jei-$jei_minecraft_version-forge-api:$jei_version")
+    if (jei_version == minecraft_version) {
+        runtimeOnly fg.deobf("mezz.jei:jei-$jei_minecraft_version-forge:$jei_version")
+    }
+
+    compileOnly fg.deobf("curse.maven:jade-324717:$jade_forge_version")
+    compileOnly "mcp.mobius.waila:wthit-api:mojmap-$wthit_version"
+    compileOnly fg.deobf("curse.maven:the-one-probe-245211:$theoneprobe_version")
 }
