@@ -118,11 +118,6 @@ sourceSets {
         ext.refMap = "${mod_id}.refmap.json"
     }
 }
-
-configurations {
-    testImplementation.extendsFrom compileOnly
-}
-
 dependencies {
     minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
     annotationProcessor 'org.spongepowered:mixin:0.8.4:processor'
@@ -143,6 +138,12 @@ tasks.withType(JavaCompile) {
 
 processResources {
     from project(":shared").sourceSets.main.resources
+}
+
+jar {
+    from(rootProject.file("LICENSE")) {
+        rename { "${it}_${mod_id}" }
+    }
 }
 
 jar.finalizedBy('reobfJar')

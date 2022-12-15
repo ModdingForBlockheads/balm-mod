@@ -69,7 +69,7 @@ tasks.withType(JavaCompile) {
 }
 
 jar {
-    from("LICENSE") {
+    from(rootProject.file("LICENSE")) {
         rename { "${it}_${mod_id}" }
     }
 }

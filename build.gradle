@@ -11,6 +11,10 @@ subprojects {
         }
     }
 
+    configurations {
+        testImplementation.extendsFrom compileOnly
+    }
+
     jar {
         manifest {
             attributes([

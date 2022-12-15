@@ -23,10 +23,6 @@ dependencies {
 
 apply from: 'dependencies.gradle'
 
-configurations {
-    testImplementation.extendsFrom compileOnly
-}
-
 jar {
     from(rootProject.file("LICENSE")) {
         rename { "${it}_${mod_id}" }
