@@ -23,10 +23,6 @@ dependencies {
         changing = balm_version.endsWith("SNAPSHOT")
     }
 
-    modApi("me.shedaniel.cloth:cloth-config-fabric:5.0.34") {
-        exclude(group: "net.fabricmc.fabric-api")
-    }
-
     implementation "org.jetbrains:annotations:22.0.0"
 }
 

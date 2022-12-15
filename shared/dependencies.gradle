@@ -5,7 +5,7 @@ repositories {
     // For WTHIT
     maven { url "https://maven.bai.lol" }
 
-    // For REI
+    // For REI and Cloth Config
     maven { url "https://maven.shedaniel.me/" }
 }
 

@@ -132,8 +132,6 @@ dependencies {
         changing = balm_version.endsWith("SNAPSHOT")
     }
 
-    compileOnly fg.deobf("me.shedaniel.cloth:cloth-config-forge:5.0.38")
-
     implementation "org.jetbrains:annotations:22.0.0"
 }
 
