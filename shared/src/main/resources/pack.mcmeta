@@ -1,6 +1,6 @@
 {
-    "pack": {
-        "description": "Balm Mod Template resources",
-        "pack_format": 8
-    }
+  "pack": {
+    "description": "${mod_name}",
+    "pack_format": ${pack_format_number}
+  }
 }

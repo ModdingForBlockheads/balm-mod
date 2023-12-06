@@ -1,50 +1,26 @@
 plugins {
-    id('java')
-    id('org.spongepowered.gradle.vanilla') version '0.2.1-SNAPSHOT'
+    id 'idea'
+    id 'java'
     id 'maven-publish'
+    id 'org.spongepowered.gradle.vanilla' version '0.2.1-SNAPSHOT'
 }
 
-group = mod_group
-version = mod_version
-archivesBaseName = "${mod_id}-common-${minecraft_version}"
+base {
+    archivesName = "${mod_id}-common-${minecraft_version}"
+}
 
 minecraft {
     version(minecraft_version)
+    if(file("src/main/resources/${mod_id}.accesswidener").exists()){
+        accessWideners(file("src/main/resources/${mod_id}.accesswidener"))
+    }
 }
 
 dependencies {
     compileOnly "org.spongepowered:mixin:$mixin_version"
-
-    compileOnly("net.blay09.mods:balm-common:$balm_version") {
-        exclude(group: "net.blay09.mods", module: "shared-bridge")
-        changing = balm_version.endsWith("SNAPSHOT")
-    }
-
-    compileOnly("me.shedaniel.cloth:cloth-config-fabric:$cloth_config_version") {
-        transitive = false
-    }
-
-    compileOnly "mezz.jei:jei-$jei_minecraft_version-common-api:$jei_version"
-    compileOnly("me.shedaniel:RoughlyEnoughItems-api:$rei_version") {
-        transitive = false
-    }
-
-    compileOnly "mcp.mobius.waila:wthit-api:mojmap-$wthit_version"
 }
 
 apply from: 'dependencies.gradle'
-
-jar {
-    from(rootProject.file("LICENSE")) {
-        rename { "${it}_${mod_id}" }
-    }
-}
-
-sourcesJar {
-    from(rootProject.file("LICENSE")) {
-        rename { "${it}_${mod_id}" }
-    }
-}
 
 publishing {
     publications {
@@ -55,19 +31,19 @@ publishing {
             artifact jar
 
             artifact sourcesJar {
-                classifier 'sources'
+                archiveClassifier = 'sources'
             }
 
             artifact project.javadocJar {
-                classifier 'javadoc'
+                archiveClassifier = 'javadoc'
             }
         }
     }
 
     repositories {
         maven {
-            var releasesRepoUrl = "https://nexus.twelveiterations.com/repository/maven-releases/"
-            var snapshotsRepoUrl = "https://nexus.twelveiterations.com/repository/maven-snapshots/"
+            var releasesRepoUrl = "https://maven.twelveiterations.com/repository/maven-releases/"
+            var snapshotsRepoUrl = "https://maven.twelveiterations.com/repository/maven-snapshots/"
             url = uri(version.toString().endsWith("SNAPSHOT") ? snapshotsRepoUrl : releasesRepoUrl)
             name = "twelveIterationsNexus"
             credentials(PasswordCredentials)

@@ -1,5 +1,5 @@
 modLoader="javafml"
-loaderVersion="${forge_loader_version_range}"
+loaderVersion="${neoforge_loader_version_range}"
 license="${license}"
 issueTrackerURL="https://github.com/TwelveIterationMods/Balm/issues"
 [[mods]]
@@ -11,15 +11,19 @@ logoFile="${mod_id}.png"
 credits="BlayTheNinth"
 authors="BlayTheNinth"
 description='''${description}'''
+[[mixins]]
+config = "${mod_id}.mixins.json"
+[[mixins]]
+config = "${mod_id}.neoforge.mixins.json"
 [[dependencies.${mod_id}]]
-    modId="forge"
-    mandatory=true
-    versionRange="${forge_version_range}"
-    ordering="NONE"
-    side="BOTH"
+modId="neoforge"
+mandatory=true
+versionRange="${neoforge_version_range}"
+ordering="NONE"
+side="BOTH"
 [[dependencies.${mod_id}]]
-    modId="minecraft"
-    mandatory=true
-    versionRange="${minecraft_version_range}"
-    ordering="NONE"
-    side="BOTH"
+modId="minecraft"
+mandatory=true
+versionRange="${minecraft_version_range}"
+ordering="NONE"
+side="BOTH"
