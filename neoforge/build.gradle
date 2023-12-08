@@ -61,6 +61,11 @@ sourceSets.main.resources { srcDir 'src/generated/resources' }
 
 dependencies {
     implementation "net.neoforged:neoforge:${neoforge_version}"
+
+    implementation("net.blay09.mods:balm-neoforge:${balm_version}") {
+        changing = balm_version.endsWith("SNAPSHOT")
+    }
+
     compileOnly project(":shared")
 
     compileOnly "org.jetbrains:annotations:22.0.0"
