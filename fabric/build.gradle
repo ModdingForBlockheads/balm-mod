@@ -17,6 +17,11 @@ dependencies {
     modImplementation "net.fabricmc:fabric-loader:${fabric_loader_version}"
     modImplementation "net.fabricmc.fabric-api:fabric-api:${fabric_version}"
 
+    modImplementation("net.blay09.mods:balm-fabric:${balm_version}") {
+        transitive = false
+        changing = balm_version.endsWith("SNAPSHOT")
+    }
+
     implementation project(":shared")
 
     compileOnly "org.jetbrains:annotations:22.0.0"
