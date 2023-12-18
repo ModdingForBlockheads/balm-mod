@@ -58,7 +58,7 @@ loom {
             runDir("build/datagen")
 
             vmArg "-Dfabric-api.datagen"
-            vmArg "-Dfabric-api.datagen.output-dir=${project(":shared").file("src/main/generated")}"
+            vmArg "-Dfabric-api.datagen.output-dir=${project(":shared").file("src/generated/resources")}"
             vmArg "-Dfabric-api.datagen.modid=${mod_id}"
         }
     }
@@ -111,7 +111,7 @@ task curseforge(type: net.darkhax.curseforgegradle.TaskPublishCurseForge) {
     def mainFile = upload(curseforge_fabric_project_id, file("${project.buildDir}/libs/${archivesBaseName}-${version}.jar"))
     mainFile.changelog = rootProject.file('CHANGELOG.md').text
     mainFile.addRequirement("fabric-api")
-	mainFile.addRequirement("balm-fabric")
+    mainFile.addRequirement("balm-fabric")
     project.minecraft_versions.split(',').toList().each { mainFile.addGameVersion(it) }
     mainFile.releaseType = "release"
 }
