@@ -40,8 +40,8 @@
     "java": ">=${java_version}",
     "minecraft": ">=${minimum_minecraft_version}",
     "fabricloader": ">=${fabric_loader_version}",
-    "fabric-api": "*",
-    "balm-fabric": "*"
+    "fabric-api": ">=${fabric_version}",
+    "balm-fabric": ">=${minimum_balm_version}"
   },
   "suggests": {
   },
