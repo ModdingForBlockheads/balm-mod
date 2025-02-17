@@ -15,7 +15,7 @@ public class ModRecipeTypes {
         recipes.registerRecipeType((identifier) -> yourRecipeType = new RecipeType<>() {
             @Override
             public String toString() {
-                return identifier.toString();
+                return identifier.getPath();
             }
         }, id("your_recipe"));
         recipes.registerRecipeSerializer(() -> yourRecipeSerializer = new YourRecipe.Serializer(), id("your_recipe"));
