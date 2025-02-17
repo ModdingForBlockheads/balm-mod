@@ -107,6 +107,7 @@ processResources {
             "credits": credits,
             "java_version": java_version,
             "homepage": homepage,
+            "discord": discord,
             "issues": issues,
             "sources": sources,
             "balm_version_range": balm_version_range,
