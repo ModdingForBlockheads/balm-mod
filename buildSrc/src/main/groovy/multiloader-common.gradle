@@ -134,10 +134,13 @@ publishing {
         }
     }
     repositories {
-        maven {
-            url = uri(version.toString().endsWith("SNAPSHOT") ? findProperty("maven_snapshots") : findProperty("maven_releases"))
-            name = "maven"
-            credentials(PasswordCredentials)
+        def repoUrl = version.toString().endsWith("SNAPSHOT") ? findProperty("maven_snapshots") : findProperty("maven_releases")
+        if (repoUrl != null) {
+            maven {
+                url = uri(repoUrl)
+                name = "maven"
+                credentials(PasswordCredentials)
+            }
         }
     }
 }
