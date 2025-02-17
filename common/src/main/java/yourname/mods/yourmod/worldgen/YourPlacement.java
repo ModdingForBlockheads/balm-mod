@@ -27,7 +27,7 @@ public class YourPlacement extends PlacementModifier {
         final var x = pos.getX();
         final var z = pos.getZ();
         final var y = context.getHeight(heightmap, x, z) + 2; // Place 2 blocks above the ground
-        return y > context.getMinY() ? Stream.of(new BlockPos(x, y, z)) : Stream.of();
+        return y > context.getMinBuildHeight() ? Stream.of(new BlockPos(x, y, z)) : Stream.of();
     }
 
     @Override

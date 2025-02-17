@@ -17,22 +17,22 @@ public record YourRecipe(Ingredient ingredient, ItemStack result) implements Rec
     }
 
     @Override
-    public PlacementInfo placementInfo() {
-        return PlacementInfo.create(ingredient);
-    }
-
-    @Override
-    public RecipeBookCategory recipeBookCategory() {
-        return ModRecipeTypes.yourRecipeBookCategory;
-    }
-
-    @Override
     public boolean matches(SingleRecipeInput singleRecipeInput, Level level) {
         return ingredient.test(singleRecipeInput.item());
     }
 
     @Override
     public ItemStack assemble(SingleRecipeInput singleRecipeInput, HolderLookup.Provider provider) {
+        return result.copy();
+    }
+
+    @Override
+    public boolean canCraftInDimensions(int width, int height) {
+        return true;
+    }
+
+    @Override
+    public ItemStack getResultItem(HolderLookup.Provider provider) {
         return result.copy();
     }
 
