@@ -79,9 +79,9 @@ jobs:
             const includeForge = includes.includes('forge') && ${{inputs.forge}};
             const includeNeoForge = includes.includes('neoforge') && ${{inputs.neoforge}};
             const gradleProperties = fs.readFileSync('gradle.properties', 'utf8');
-            const curseForgeProjectId = gradleProperties.match(/\bcurseforge_project_id\s*=\s*(.+)/);
-            const modrinthProjectId = gradleProperties.match(/\bmodrinth_project_id\s*=\s*(.+)/);
-            const mavenReleases = gradleProperties.match(/\bmaven_releases\s*=\s*(.+)/);
+            const curseForgeProjectId = gradleProperties.match(/^(?!#)curseforge_project_id\s*=\s*(.+)/);
+            const modrinthProjectId = gradleProperties.match(/^(?!#)modrinth_project_id\s*=\s*(.+)/);
+            const mavenReleases = gradleProperties.match(/^(?!#)maven_releases\s*=\s*(.+)/);
             return {
               loader: ['common', includeFabric ? 'fabric' : false, includeForge ? 'forge' : false, includeNeoForge ? 'neoforge' : false].filter(Boolean),
               site: [curseForgeProjectId ? 'curseforge' : '', modrinthProjectId ? 'modrinth' : '', mavenReleases ? 'publish' : ''].filter(Boolean),

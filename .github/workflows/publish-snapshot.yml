@@ -26,7 +26,7 @@ jobs:
             const includeForge = includes.includes('forge');
             const includeNeoForge = includes.includes('neoforge');
             const gradleProperties = fs.readFileSync('gradle.properties', 'utf8');
-            const mavenSnapshots = gradleProperties.match(/\bmaven_snapshots\s*=\s*(.+)/);
+            const mavenSnapshots = gradleProperties.match(/^(?!#)maven_snapshots\s*=\s*(.+)/);
             return {
               loader: ['common', includeFabric ? 'fabric' : false, includeForge ? 'forge' : false, includeNeoForge ? 'neoforge' : false].filter(Boolean),
               task: [mavenSnapshots ? 'publish' : 'build']
