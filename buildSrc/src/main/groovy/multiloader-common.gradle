@@ -93,7 +93,7 @@ processResources {
             "version": version,
             "group": project.group, //Else we target the task's group.
             "minecraft_version": minecraft_version,
-            "minimum_minecraft_version": minecraft_version_range.replaceAll("[\\[\\],)]", "").split("-")[0],
+            "minimum_minecraft_version": minecraft_version_range.replaceAll("[\\[\\])]", "").split(",")[0],
             "forge_version": forge_version,
             "forge_loader_version_range": forge_loader_version_range,
             "forge_version_range": forge_version_range,
@@ -106,9 +106,6 @@ processResources {
             "mod_id": mod_id,
             "license": license,
             "description": project.description,
-            "neoforge_version": neoforge_version,
-            "neoforge_version_range": neoforge_version_range,
-            "neoforge_loader_version_range": neoforge_loader_version_range,
             "credits": credits,
             "java_version": java_version,
             "homepage": homepage,
@@ -116,7 +113,7 @@ processResources {
             "issues": issues,
             "sources": sources,
             "balm_version_range": balm_version_range,
-            "minimum_balm_version": balm_version_range.replaceAll("[\\[\\],)]", "").split("-")[0],
+            "minimum_balm_version": balm_version_range.replaceAll("[\\[\\])]", "").split(",")[0],
     ]
 
     filesMatching(['pack.mcmeta', 'fabric.mod.json', 'META-INF/mods.toml', 'META-INF/neoforge.mods.toml', '*.mixins.json']) {

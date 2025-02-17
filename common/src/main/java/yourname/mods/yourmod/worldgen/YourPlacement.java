@@ -1,6 +1,6 @@
 package yourname.mods.yourmod.worldgen;
 
-import com.mojang.serialization.MapCodec;
+import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.RandomSource;
@@ -13,7 +13,7 @@ import java.util.stream.Stream;
 
 public class YourPlacement extends PlacementModifier {
 
-    public static final MapCodec<YourPlacement> CODEC = RecordCodecBuilder.mapCodec((builder) -> builder.group(Heightmap.Types.CODEC.fieldOf("heightmap")
+    public static final Codec<YourPlacement> CODEC = RecordCodecBuilder.create((builder) -> builder.group(Heightmap.Types.CODEC.fieldOf("heightmap")
             .forGetter((placement) -> placement.heightmap)).apply(builder, YourPlacement::new));
 
     private final Heightmap.Types heightmap;
@@ -27,7 +27,7 @@ public class YourPlacement extends PlacementModifier {
         final var x = pos.getX();
         final var z = pos.getZ();
         final var y = context.getHeight(heightmap, x, z) + 2; // Place 2 blocks above the ground
-        return y > context.getMinY() ? Stream.of(new BlockPos(x, y, z)) : Stream.of();
+        return y > context.getMinBuildHeight() ? Stream.of(new BlockPos(x, y, z)) : Stream.of();
     }
 
     @Override

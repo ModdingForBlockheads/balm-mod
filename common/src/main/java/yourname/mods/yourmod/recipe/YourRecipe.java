@@ -1,15 +1,17 @@
 package yourname.mods.yourmod.recipe;
 
-import com.mojang.serialization.MapCodec;
-import com.mojang.serialization.codecs.RecordCodecBuilder;
-import net.minecraft.core.HolderLookup;
-import net.minecraft.network.RegistryFriendlyByteBuf;
-import net.minecraft.network.codec.StreamCodec;
+import com.google.gson.JsonObject;
+import net.minecraft.core.RegistryAccess;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.GsonHelper;
+import net.minecraft.world.Container;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.Level;
 
-public record YourRecipe(Ingredient ingredient, ItemStack result) implements Recipe<SingleRecipeInput> {
+public record YourRecipe(ResourceLocation identifier, Ingredient ingredient, ItemStack result) implements Recipe<Container> {
 
     @Override
     public RecipeType<YourRecipe> getType() {
@@ -17,23 +19,28 @@ public record YourRecipe(Ingredient ingredient, ItemStack result) implements Rec
     }
 
     @Override
-    public PlacementInfo placementInfo() {
-        return PlacementInfo.create(ingredient);
+    public boolean matches(Container container, Level level) {
+        return ingredient.test(container.getItem(0));
     }
 
     @Override
-    public RecipeBookCategory recipeBookCategory() {
-        return ModRecipeTypes.yourRecipeBookCategory;
-    }
-
-    @Override
-    public boolean matches(SingleRecipeInput singleRecipeInput, Level level) {
-        return ingredient.test(singleRecipeInput.item());
-    }
-
-    @Override
-    public ItemStack assemble(SingleRecipeInput singleRecipeInput, HolderLookup.Provider provider) {
+    public ItemStack assemble(Container container, RegistryAccess registryAccess) {
         return result.copy();
+    }
+
+    @Override
+    public boolean canCraftInDimensions(int width, int height) {
+        return true;
+    }
+
+    @Override
+    public ItemStack getResultItem(RegistryAccess registryAccess) {
+        return null;
+    }
+
+    @Override
+    public ResourceLocation getId() {
+        return identifier;
     }
 
     @Override
@@ -42,24 +49,27 @@ public record YourRecipe(Ingredient ingredient, ItemStack result) implements Rec
     }
 
     public static class Serializer implements RecipeSerializer<YourRecipe> {
-        private static final MapCodec<YourRecipe> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
-                Ingredient.CODEC.fieldOf("ingredient").forGetter(YourRecipe::ingredient),
-                ItemStack.STRICT_CODEC.fieldOf("result").forGetter(YourRecipe::result)
-        ).apply(instance, YourRecipe::new));
-
-        public static final StreamCodec<RegistryFriendlyByteBuf, YourRecipe> STREAM_CODEC = StreamCodec.composite(
-                Ingredient.CONTENTS_STREAM_CODEC, YourRecipe::ingredient,
-                ItemStack.STREAM_CODEC, YourRecipe::result,
-                YourRecipe::new);
-
         @Override
-        public MapCodec<YourRecipe> codec() {
-            return CODEC;
+        public YourRecipe fromJson(ResourceLocation identifier, JsonObject jsonObject) {
+            final var jsonElement = GsonHelper.isArrayNode(jsonObject, "ingredient") ? GsonHelper.getAsJsonArray(jsonObject, "ingredient") : GsonHelper.getAsJsonObject(jsonObject, "ingredient");
+            final var ingredient = Ingredient.fromJson(jsonElement, false);
+            final var resultString = GsonHelper.getAsString(jsonObject, "result");
+            final var resultId = new ResourceLocation(resultString);
+            final var result = new ItemStack(BuiltInRegistries.ITEM.getOptional(resultId).orElseThrow(() -> new IllegalStateException("Item: " + resultString + " does not exist")));
+            return new YourRecipe(identifier, ingredient, result);
         }
 
         @Override
-        public StreamCodec<RegistryFriendlyByteBuf, YourRecipe> streamCodec() {
-            return STREAM_CODEC;
+        public YourRecipe fromNetwork(ResourceLocation identifier, FriendlyByteBuf buf) {
+            final var ingredient = Ingredient.fromNetwork(buf);
+            final var result = buf.readItem();
+            return new YourRecipe(identifier, ingredient, result);
+        }
+
+        @Override
+        public void toNetwork(FriendlyByteBuf buf, YourRecipe recipe) {
+            recipe.ingredient.toNetwork(buf);
+            buf.writeItem(recipe.result);
         }
     }
 }

@@ -1,7 +1,6 @@
 package yourname.mods.yourmod.loot;
 
 import net.blay09.mods.balm.api.loot.BalmLootModifier;
-import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -16,7 +15,7 @@ public class YourLootModifier implements BalmLootModifier {
     public void apply(LootContext context, List<ItemStack> list) {
         if (context.getRandom().nextFloat() < 0.1f) {
             final var itemStack = new ItemStack(Items.STICK);
-            itemStack.set(DataComponents.CUSTOM_NAME, Component.literal(YourMod.MOD_ID));
+            itemStack.setHoverName(Component.literal(YourMod.MOD_ID));
             list.add(itemStack);
         }
     }

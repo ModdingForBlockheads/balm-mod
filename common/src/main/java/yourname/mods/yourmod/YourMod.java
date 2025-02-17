@@ -8,7 +8,6 @@ import yourname.mods.yourmod.api.YourModAPI;
 import yourname.mods.yourmod.block.ModBlocks;
 import yourname.mods.yourmod.block.entity.ModBlockEntities;
 import yourname.mods.yourmod.command.ModCommands;
-import yourname.mods.yourmod.component.ModComponents;
 import yourname.mods.yourmod.entity.ModEntities;
 import yourname.mods.yourmod.item.ModItems;
 import yourname.mods.yourmod.loot.ModLoot;
@@ -29,7 +28,6 @@ public class YourMod {
         YourModAPI.__setupAPI(new InternalMethodsImpl());
 
         YourModConfig.initialize();
-        ModComponents.initialize(Balm.getComponents());
         ModBlocks.initialize(Balm.getBlocks());
         ModBlockEntities.initialize(Balm.getBlockEntities());
         ModEntities.initialize(Balm.getEntities());
@@ -45,7 +43,7 @@ public class YourMod {
     }
 
     public static ResourceLocation id(String path) {
-        return ResourceLocation.fromNamespaceAndPath(MOD_ID, path);
+        return new ResourceLocation(MOD_ID, path);
     }
 
 }

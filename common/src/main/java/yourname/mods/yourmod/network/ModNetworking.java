@@ -7,21 +7,23 @@ import yourname.mods.yourmod.network.protocol.ClientboundConfigMessage;
 import yourname.mods.yourmod.network.protocol.ClientboundTestPacket;
 import yourname.mods.yourmod.network.protocol.ServerboundTestPacket;
 
+import static yourname.mods.yourmod.YourMod.id;
+
 public class ModNetworking {
 
     public static void initialize(BalmNetworking networking) {
-        networking.registerServerboundPacket(ServerboundTestPacket.TYPE,
+        networking.registerServerboundPacket(id("hello_server"),
                 ServerboundTestPacket.class,
                 ServerboundTestPacket::encode,
                 ServerboundTestPacket::decode,
                 ServerboundTestPacket::handle);
-        networking.registerClientboundPacket(ClientboundTestPacket.TYPE,
+        networking.registerClientboundPacket(id("hello_client"),
                 ClientboundTestPacket.class,
                 ClientboundTestPacket::encode,
                 ClientboundTestPacket::decode,
                 ClientboundTestPacket::handle);
 
-        SyncConfigMessage.register(ClientboundConfigMessage.TYPE,
+        SyncConfigMessage.register(id("config"),
                 ClientboundConfigMessage.class,
                 ClientboundConfigMessage::new,
                 YourModConfig.class,
