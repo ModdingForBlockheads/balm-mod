@@ -78,9 +78,13 @@ jobs:
             const includeFabric = includes.includes('fabric') && ${{inputs.fabric}};
             const includeForge = includes.includes('forge') && ${{inputs.forge}};
             const includeNeoForge = includes.includes('neoforge') && ${{inputs.neoforge}};
+            const gradleProperties = fs.readFileSync('gradle.properties', 'utf8');
+            const curseForgeProjectId = gradleProperties.match(/\bcurseforge_project_id\s*=\s*(.+)/);
+            const modrinthProjectId = gradleProperties.match(/\bmodrinth_project_id\s*=\s*(.+)/);
+            const mavenReleases = gradleProperties.match(/\bmaven_releases\s*=\s*(.+)/);
             return {
               loader: ['common', includeFabric ? 'fabric' : false, includeForge ? 'forge' : false, includeNeoForge ? 'neoforge' : false].filter(Boolean),
-              site: ['curseforge', 'modrinth', 'publish'],
+              site: [curseForgeProjectId ? 'curseforge' : '', modrinthProjectId ? 'modrinth' : '', mavenReleases ? 'publish' : ''].filter(Boolean),
               exclude: [
                 {loader: 'common', site: 'curseforge'},
                 {loader: 'common', site: 'modrinth'}
@@ -172,7 +176,7 @@ jobs:
       - name: Make gradle wrapper executable
         run: chmod +x ./gradlew
       - name: Publish
-        run: ./gradlew :${{ matrix.loader }}:${{ matrix.site }} '-Pversion=${{needs.create-release.outputs.version}}' '-PtwelveIterationsNexusUsername=${{ secrets.NEXUS_USER }}' '-PtwelveIterationsNexusPassword=${{ secrets.NEXUS_PASSWORD }}'
+        run: ./gradlew :${{ matrix.loader }}:${{ matrix.site }} '-Pversion=${{needs.create-release.outputs.version}}' '-PmavenUsername=${{ secrets.MAVEN_USER }}' '-PmavenPassword=${{ secrets.MAVEN_PASSWORD }}'
         env:
           CURSEFORGE_TOKEN: ${{secrets.CURSEFORGE_TOKEN}}
           MODRINTH_TOKEN: ${{secrets.MODRINTH_TOKEN}}
